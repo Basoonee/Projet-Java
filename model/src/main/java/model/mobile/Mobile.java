@@ -102,6 +102,12 @@ abstract class Mobile extends Element implements IMobile {
         if(this.getPermeability()==Permeability.LORANN) {
         this.open();
         }
+        if(this.getPermeability()==Permeability.KILL) {
+            
+        	if(this.isKey()) {
+        		moveDown();
+        	}
+        }
     }
 
  
@@ -114,6 +120,12 @@ abstract class Mobile extends Element implements IMobile {
         }
         if(this.getPermeability()==Permeability.LORANN) {
         this.open();
+        }
+        if(this.getPermeability()==Permeability.KILL) {
+            
+        	if(this.isKey()) {
+        		moveRight();
+        	}
         }
     
     }
@@ -129,6 +141,12 @@ abstract class Mobile extends Element implements IMobile {
         if(this.getPermeability()==Permeability.LORANN) {
         this.open();
         }
+        if(this.getPermeability()==Permeability.KILL) {
+            
+        	if(this.isKey()) {
+        		moveUp();
+        	}
+        }
 
     }
 
@@ -140,6 +158,13 @@ abstract class Mobile extends Element implements IMobile {
         if (this.isBlocked()) {
         	moveLeft();
         }
+        if(this.getPermeability()==Permeability.KILL) {
+        
+        	if(this.isKey()) {
+        		moveLeft();
+        	}
+        }
+
         if(this.getPermeability()==Permeability.LORANN) {
         	this.open();
         }        
@@ -152,10 +177,7 @@ abstract class Mobile extends Element implements IMobile {
     		
     	}
   
-    	if(this.OnGate()) {;
-    		System.out.println("next level");
-    		this.setLevel(getLevel()+1);    		
-    	}
+    
     	
     }
 
@@ -166,6 +188,12 @@ abstract class Mobile extends Element implements IMobile {
         this.setHasMoved();
         if (this.isBlocked()) {
         	moveUpLeft();
+        }
+        if(this.getPermeability()==Permeability.KILL) {
+            
+        	if(this.isKey()) {
+        		moveUpLeft();
+        	}
         }
         
     }
@@ -178,6 +206,12 @@ abstract class Mobile extends Element implements IMobile {
         if (this.isBlocked()) {
         	moveUpRight();
         }
+        if(this.getPermeability()==Permeability.KILL) {
+            
+        	if(this.isKey()) {
+        		moveUpRight();
+        	}
+        }
     }
     
     @Override
@@ -188,6 +222,12 @@ abstract class Mobile extends Element implements IMobile {
         if (this.isBlocked()) {
         	moveDownLeft();
         }
+        if(this.getPermeability()==Permeability.KILL) {
+            
+        	if(this.isKey()) {
+        		moveDownLeft();
+        	}
+        }
     }
     
     @Override
@@ -197,6 +237,12 @@ abstract class Mobile extends Element implements IMobile {
         this.setHasMoved();
         if (this.isBlocked()) {
         	moveDownRight();
+        }
+        if(this.getPermeability()==Permeability.KILL) {
+            
+        	if(this.isKey()) {
+        		moveDownRight();
+        	}
         }
     }
 

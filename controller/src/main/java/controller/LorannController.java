@@ -295,6 +295,7 @@ private boolean reload = true;
     private void open(IMobile actualLorann) {
     	if(this.getModel().getMap().getOnTheMapXY(actualLorann.getX(), actualLorann.getY()).getPermeability() == Permeability.KEY) {
     		this.getModel().getMap().getActualCrystalBall().donothing();
+    		this.getModel().getMap().getActualCrystalBall().setPermeability(Permeability.PENETRABLE);
     		this.getActualGate().setPermeability(Permeability.OPEN);
     		this.getModel().getGate().doNothing();
     	}
