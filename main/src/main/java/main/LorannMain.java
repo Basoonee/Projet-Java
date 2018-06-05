@@ -24,11 +24,11 @@ public abstract class LorannMain {
 
     /** The Constant startX. */
 
+private static int level =2;
 
-	
     public static void main(final String[] args) throws IOException, InterruptedException {
     	Bdd bdd = new Bdd();
-        final ILorannModel model = new LorannModel(bdd.lireEnBase(2), bdd.lireEnBaseMobile(2));
+        final ILorannModel model = new LorannModel(bdd.lireEnBase(level), bdd.lireEnBaseMobile(level));
 
         
      
@@ -40,6 +40,17 @@ public abstract class LorannMain {
   
         controller.play();
  
+    }
+    public static void mainBis(int level) throws IOException, InterruptedException {
+    	Bdd bdd = new Bdd();
+        final ILorannModel model = new LorannModel(bdd.lireEnBase(level), bdd.lireEnBaseMobile(level));
+
+       final LorannView view = new LorannView(model.getMap(), model.getPt(), model.getNbrMobile());
+        
+    	final ILorannController controller = new LorannController(view, model);
+        view.setOrderPerformer(controller.getOrderPeformer());
+  
+        controller.play();
     }
 
 }

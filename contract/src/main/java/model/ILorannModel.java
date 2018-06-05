@@ -17,9 +17,13 @@ public interface ILorannModel {
      *
      * @return the myVehicle
      */
-    IMobile getLorann();
+    public IMobile getLorann();
 
     IMobile[] getPt();
     
     int getNbrMobile();
+    int[][] getC();
+    public IMobile getGate();
+
+    
 }

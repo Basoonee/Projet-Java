@@ -17,4 +17,8 @@ import model.Sprite;
 		    Bone() {
 		        super(SPRITE, Permeability.BLOCKING);
 		    }
+
+		    public void setPermeability(final Permeability permeability) {
+		        this.permeability = permeability;
+		    }
 		}

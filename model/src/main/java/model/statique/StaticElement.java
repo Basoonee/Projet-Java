@@ -17,5 +17,10 @@ public abstract class StaticElement extends Element {
         super(sprite, permeability);
 	}
 
+	public void donothing() {
+		super.donothing();
+		
+	}
+
 	
 }

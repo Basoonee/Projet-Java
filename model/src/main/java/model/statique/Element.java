@@ -14,7 +14,7 @@ public abstract class Element implements IElement {
     private Sprite       sprite;
 
     /** The permeability. */
-    private Permeability permeability;
+    protected Permeability permeability;
 
     /**
      * Instantiates a new element.
@@ -47,7 +47,7 @@ public abstract class Element implements IElement {
      * @param sprite
      *            the new sprite
      */
-    protected final void setSprite(final Sprite sprite) {
+    public final void setSprite(final Sprite sprite) {
         this.sprite = sprite;
     }
 
@@ -66,7 +66,7 @@ public abstract class Element implements IElement {
      * @param permeability
      *            the new permeability
      */
-    private void setPermeability(final Permeability permeability) {
+    public void setPermeability(final Permeability permeability) {
         this.permeability = permeability;
     }
 
@@ -82,4 +82,9 @@ public abstract class Element implements IElement {
     public final Image getImage() {
         return this.getSprite().getImage();
     }
+
+	public void donothing() {
+		// TODO Auto-generated method stub
+		
+	}
 }

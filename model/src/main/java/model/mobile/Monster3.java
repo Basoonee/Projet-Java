@@ -77,11 +77,7 @@ public class Monster3 extends Mobile {
 			
 		}
 
-		@Override
-		public void MonsterisFacingLorann() {
-			// TODO Auto-generated method stub
-			
-		}
+	
 
 		@Override
 		public void alive() {
@@ -89,10 +85,10 @@ public class Monster3 extends Mobile {
 			
 		}
 
-		@Override
-		public void LorannisFacingMonster() {
-			// TODO Auto-generated method stub
-			
-		}
+	
+
+	    public void setPermeability(final Permeability permeability) {
+	        this.permeability = permeability;
+	    }
 
 }

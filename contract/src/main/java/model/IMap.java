@@ -42,4 +42,7 @@ public interface IMap {
      * @return the observable
      */
     Observable getObservable();
+    IElement getActualCrystalBall();
+
+ 
 }

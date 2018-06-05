@@ -1,15 +1,12 @@
 package model;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Observable;
 
 import model.statique.StaticElementFactory;
 import model.IElement;
 import model.IMap;
-
+import model.statique.CrystalBall;
 /**
  * <h1>The Map Class.</h1>
  *
@@ -27,8 +24,27 @@ public class MapLorann extends Observable implements IMap {
 
     /** The on the Map. */
     private IElement[][] onTheMap;
+    private IElement ActualCrystalBall;
+    
+    public IElement getActualCrystalBall() {
+		return ActualCrystalBall;
+	}
 
-    /**
+
+
+
+
+	public void setActualCrystalBall(IElement actualCrystalBall) {
+		ActualCrystalBall = actualCrystalBall;
+	}
+
+	private CrystalBall crystalBall = new CrystalBall();
+
+
+
+
+
+	/**
      * Instantiates a new Map with the content of the file fileName.
      *
      * @param fileName
@@ -124,7 +140,10 @@ public class MapLorann extends Observable implements IMap {
      *            the y
      */
     public void setOnTheMapXY(final IElement element, final int x, final int y) {
-        this.onTheMap[x][y] = element;
+        if(element.getClass()== this.crystalBall.getClass()) {
+        	this.setActualCrystalBall(element);
+        }
+    	this.onTheMap[x][y] = element;
     }
 
     /*
@@ -145,4 +164,8 @@ public class MapLorann extends Observable implements IMap {
     public Observable getObservable() {
         return this;
     }
+
+
+
+
 }

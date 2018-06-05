@@ -14,5 +14,9 @@ public class Vide extends StaticElement implements IVoid{
 	    Vide() {
 	        super(SPRITE, Permeability.PENETRABLE);
 	    }
+
+	    public void setPermeability(final Permeability permeability) {
+	        this.permeability = permeability;
+	    }
 	}
 

@@ -22,4 +22,7 @@ public interface ILorannView {
      * Follow myVehicle.
      */
     void setOrderPerformer(IOrderPerformer orderPeformer);
+
+	void SpellSpawn(IMobile spell);
+
 }

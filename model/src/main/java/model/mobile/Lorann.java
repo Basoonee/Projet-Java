@@ -55,7 +55,11 @@ public class Lorann extends Mobile {
 
     }
 
-    /*
+    public Lorann() {
+		// TODO Auto-generated constructor stub
+	}
+
+	/*
      * (non-Javadoc)
      * @see fr.exia.insanevehicles.model.element.mobile.Mobile#moveLeft()
      */
@@ -166,11 +170,7 @@ public class Lorann extends Mobile {
 		
 	}
 
-	@Override
-	public void MonsterisFacingLorann() {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 	@Override
 	public void alive() {
@@ -178,15 +178,17 @@ public class Lorann extends Mobile {
 		
 	}
 
-	@Override
-	public void LorannisFacingMonster() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public int getVie() {
 		// TODO Auto-generated method stub
 		return vie;
 	}
+
+
+
+    public void setPermeability(final Permeability permeability) {
+        this.permeability = permeability;
+    }
+
 }

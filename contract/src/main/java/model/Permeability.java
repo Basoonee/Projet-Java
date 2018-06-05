@@ -7,6 +7,8 @@ public enum Permeability  {
     KILL,
 	KILLMONSTER,
 	GOLD,
-	
+	KEY,
+	GATE,
+	OPEN,
 	LORANN,
 }

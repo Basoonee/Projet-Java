@@ -1,12 +1,18 @@
 package model.mobile;
 
 import java.awt.Point;
+import java.io.IOException;
 
+import model.ILorannModel;
 import model.IMap;
 import model.IMobile;
+import model.LorannModel;
+import model.MapLorann;
 import model.statique.Element;
+import model.statique.StaticElementFactory;
 import model.Permeability;
 import model.Sprite;
+import model.dao.Bdd;
 import showboard.IBoard;
 
 /**
@@ -34,9 +40,29 @@ abstract class Mobile extends Element implements IMobile {
     private int gold = 0;
     
     protected int vie = 11;
+    
+    private int level=1;
+
+    private Sprite spriteGate = new Sprite('G', "gate_open.png");
 
     
-    Mobile(final Sprite sprite, final IMap map, final Permeability permeability) {
+    public Sprite getSpriteGate() {
+		return spriteGate;
+	}
+
+	public void setSpriteGate(Sprite spriteGate) {
+		this.spriteGate = spriteGate;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	Mobile(final Sprite sprite, final IMap map, final Permeability permeability) {
         super(sprite, permeability);
         this.setMap(map);
         this.position = new Point();
@@ -73,6 +99,9 @@ abstract class Mobile extends Element implements IMobile {
         if (this.isBlocked()) {
         	moveDown();
         }
+        if(this.getPermeability()==Permeability.LORANN) {
+        this.open();
+        }
     }
 
  
@@ -83,6 +112,10 @@ abstract class Mobile extends Element implements IMobile {
         if (this.isBlocked()) {
         	moveRight();
         }
+        if(this.getPermeability()==Permeability.LORANN) {
+        this.open();
+        }
+    
     }
 
  
@@ -93,6 +126,10 @@ abstract class Mobile extends Element implements IMobile {
         if (this.isBlocked()) {
         	moveUp();
         }
+        if(this.getPermeability()==Permeability.LORANN) {
+        this.open();
+        }
+
     }
 
 
@@ -103,6 +140,23 @@ abstract class Mobile extends Element implements IMobile {
         if (this.isBlocked()) {
         	moveLeft();
         }
+        if(this.getPermeability()==Permeability.LORANN) {
+        	this.open();
+        }        
+    }
+    
+    public void open() {
+    	if (this.OnPurse()) {
+    		this.getX();
+    		this.GetGold();
+    		
+    	}
+  
+    	if(this.OnGate()) {;
+    		System.out.println("next level");
+    		this.setLevel(getLevel()+1);    		
+    	}
+    	
     }
 
     @Override
@@ -110,6 +164,9 @@ abstract class Mobile extends Element implements IMobile {
         this.setX(this.getX() + 1);
         this.setY(this.getY() + 1);
         this.setHasMoved();
+        if (this.isBlocked()) {
+        	moveUpLeft();
+        }
         
     }
     
@@ -118,6 +175,9 @@ abstract class Mobile extends Element implements IMobile {
         this.setX(this.getX() - 1);
         this.setY(this.getY() + 1);
         this.setHasMoved();
+        if (this.isBlocked()) {
+        	moveUpRight();
+        }
     }
     
     @Override
@@ -125,6 +185,9 @@ abstract class Mobile extends Element implements IMobile {
         this.setX(this.getX() + 1);
         this.setY(this.getY() - 1);
         this.setHasMoved();
+        if (this.isBlocked()) {
+        	moveDownLeft();
+        }
     }
     
     @Override
@@ -132,6 +195,9 @@ abstract class Mobile extends Element implements IMobile {
         this.setX(this.getX() - 1);
         this.setY(this.getY() - 1);
         this.setHasMoved();
+        if (this.isBlocked()) {
+        	moveDownRight();
+        }
     }
 
     @Override
@@ -144,6 +210,8 @@ abstract class Mobile extends Element implements IMobile {
      */
     private void setHasMoved() {
         this.getMap().setMobileHasChanged();
+    
+        
     }
 
 
@@ -220,42 +288,12 @@ abstract class Mobile extends Element implements IMobile {
     }
 
     
-    /**
-    
-    public Boolean isFacingMonster() {
-        return this.getX() == LorannController.CoXMonster1 && this.getY() == LorannController.CoYMonster1 || this.getX() == LorannController.CoXMonster2 && this.getY() == LorannController.CoYMonster2 ;
+    public Boolean isKey() {
+        return this.getMap().getOnTheMapXY(this.getX(), this.getY()).getPermeability() == Permeability.KEY;
     }
+
     
-    public Boolean isFacingLorann() {
-        return this.getX() == LorannController.CoXLorann && this.getY() == LorannController.CoYLorann;
-    }
-    
-    public void LorannisFacingMonster() {
-        if(this.isFacingMonster()) {
-        	vie--;
-        	System.out.println("Vies : "+ vie);
-        	this.setX(xLorann);
-        	this.setY(yLorann);
-        	if(vie<1) {
-        		this.die();
-        	}
-        }
-        if(this.OnPurse()) {
-        	GetGold();
-        }
-    }
-    
-    public void MonsterisFacingLorann() {
-        if(this.isFacingLorann()) {
-        	LorannController.vies--;
-        	System.out.println("Vies : "+ LorannController.vies);
-        }
-    	if(vie<1) {
-    		this.die();
-    	}
-    }
-    
-*/
+
     public int getVie() {
 		return vie;
 	}
@@ -265,6 +303,9 @@ abstract class Mobile extends Element implements IMobile {
 
     public Boolean OnPurse() {
         return this.getMap().getOnTheMapXY(this.getX(), this.getY()).getPermeability() == Permeability.GOLD;
+    }
+    public Boolean OnGate() {
+        return this.getMap().getOnTheMapXY(this.getX(), this.getY()).getPermeability() == Permeability.OPEN;
     }
     public void GetGold() {
     	gold++;

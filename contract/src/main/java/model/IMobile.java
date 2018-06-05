@@ -85,16 +85,20 @@ public interface IMobile extends IPawn, IElement {
 
 	void doNothingLeft();
 
-
-	void LorannisFacingMonster();
-	
-	void MonsterisFacingLorann();
-
 	int getVie();
+	void setVie(int i);
 	
 	void setY(final int y);
 	
 	void setX(final int x);
+
+	IMap getMap();
+	
+    public Sprite getSpriteGate() ;
+
+	public void setSpriteGate(Sprite spriteGate) ;
+
+	void die();
 	
 
 }

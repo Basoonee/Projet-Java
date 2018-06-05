@@ -15,6 +15,7 @@ import controller.UserOrder;
 import model.ILorannView;
 import model.IMap;
 import model.IMobile;
+import model.mobile.Spell;
 import showboard.BoardFrame;
 
 /**
@@ -40,13 +41,19 @@ public class LorannView implements Runnable, KeyListener, ILorannView {
     private IMap            map;
 
     /** My vehicle. */
-    private IMobile          lorann;
     private IMobile[]         Imobile;
     private int				NbrMobile;
+    private static BoardFrame boardFrame;
+    
+    public static BoardFrame getBoardFrame() {
+		return boardFrame;
+	}
 
+	public void setBoardFrame(BoardFrame boardFrame) {
+		LorannView.boardFrame = boardFrame;
+	}
 
-
-    public int getNbrMobile() {
+	public int getNbrMobile() {
 		return NbrMobile;
 	}
 
@@ -119,6 +126,7 @@ public class LorannView implements Runnable, KeyListener, ILorannView {
         boardFrame.setFocusable(true);
         boardFrame.setFocusTraversalKeysEnabled(false);
         boardFrame.setLocationRelativeTo(null);
+        this.setBoardFrame(boardFrame);
 
 
         for (int x = 0; x < 20; x++) {
@@ -136,26 +144,6 @@ public class LorannView implements Runnable, KeyListener, ILorannView {
         
     }
 
-    /**
-     * Prints the map and the player's vehicle in the console.
-     *
-     * @param yStart
-     *            the y start
-     
-    public final void show(final int yStart) {
-        int y = yStart % 20;
-        for (int view = 0; view < this.getView(); view++) {
-            for (int x = 0; x < 11; x++) {
-                if ((x == this.getlorann().getX()) && (y == yStart)) {
-                    System.out.print(this.getlorann().getSprite().getConsoleImage());
-                } else {
-                    System.out.print(this.getmap().getOnTheMapXY(x, y).getSprite().getConsoleImage());
-                }
-            }
-            y = (y + 1) % 20;
-            System.out.print("\n");
-        }
-    }
 
     /**
      * Key code to user order.
@@ -274,14 +262,7 @@ public class LorannView implements Runnable, KeyListener, ILorannView {
      *
      * @return my vehicle
      */
-    private IMobile getlorann() {
-        return this.lorann;
-    }
 
-
-    private void setlorann(final IMobile lorann) {
-        this.lorann = lorann;
-    }
 
 
 
@@ -323,4 +304,10 @@ public class LorannView implements Runnable, KeyListener, ILorannView {
     public final void setOrderPerformer(final IOrderPerformer orderPerformer) {
         this.orderPerformer = orderPerformer;
     }
+
+	@Override
+	public void SpellSpawn(IMobile spell) {
+		boardFrame.addPawn(spell);
+	}
+
 }

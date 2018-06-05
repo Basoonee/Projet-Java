@@ -6,7 +6,6 @@ public abstract class StaticElementFactory {
 
     private static final Bone	            BONE               = new Bone();
     private static final CrystalBall        CRYSTAL_BALL       = new CrystalBall();
-    private static final Gate               GATE               = new Gate();
     private static final HorizontalBone     HORIZONTAL_BONE    = new HorizontalBone();
     private static final Purse              PURSE              = new Purse();
     private static final VerticalBone       VERTICAL_BONE      = new VerticalBone();
@@ -18,7 +17,6 @@ public abstract class StaticElementFactory {
     		
             BONE,
             CRYSTAL_BALL,
-            GATE,
             HORIZONTAL_BONE,
             PURSE,
             VERTICAL_BONE,
@@ -33,9 +31,6 @@ public abstract class StaticElementFactory {
 
     public static StaticElement createCrystalBall() {
         return CRYSTAL_BALL;
-    }
-    public static StaticElement createGate() {
-        return GATE;
     }
     public static StaticElement createHorizontalBone() {
         return HORIZONTAL_BONE;

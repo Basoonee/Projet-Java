@@ -9,10 +9,21 @@ public class CrystalBall extends StaticElement implements ICrystalBall{
 
 	   private static final Sprite SPRITE = new Sprite('C', "crystal_ball.png");
 
+	   private static final Sprite SPRITEGONE = new Sprite('C', "void.png");
+
 	    /**
 	     * Instantiates a new ditchLeft.
 	     */
-	    CrystalBall() {
-	        super(SPRITE, Permeability.PENETRABLE);
+	    public CrystalBall() {
+	        super(SPRITE, Permeability.KEY);
 	    }
+
+	    public void setPermeability(final Permeability permeability) {
+	        this.permeability = permeability;
+	    }
+	    public void donothing() {
+	    	super.donothing();
+	    	this.setSprite(SPRITEGONE);
+	    }
+	    
 	}

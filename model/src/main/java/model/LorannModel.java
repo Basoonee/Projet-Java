@@ -2,6 +2,7 @@ package model;
 
 import java.io.IOException;
 
+import model.mobile.Gate;
 import model.mobile.Lorann;
 import model.mobile.Monster1;
 import model.mobile.Monster2;
@@ -19,6 +20,7 @@ public class LorannModel implements ILorannModel {
 	private int NbrMobile;
 
 	private IMobile[] pt = new IMobile[getNbrMobile()];
+	private int level;
 
 	public int getNbrMobile() {
 		return NbrMobile;
@@ -35,7 +37,16 @@ public class LorannModel implements ILorannModel {
 	private IMobile monster2 ;
 
 	private IMobile monster1 ;
+	
+	public  IMobile getGate() {
+		return gate;
+	}
 
+	public void setGate(IMobile gate) {
+		this.gate = gate;
+	}
+
+	private  IMobile gate;
 
 
 	/** The Map. */
@@ -43,8 +54,17 @@ public class LorannModel implements ILorannModel {
 
     /** The my vehicle. */
     private IMobile lorann;
+    private int[][] C;
 
-    /**
+    public int[][] getC() {
+		return C;
+	}
+
+	public void setC(int[][] c) {
+		C = c;
+	}
+
+	/**
      * Instantiates a new insane vehicles model.
      *
      * @param fileName
@@ -63,8 +83,12 @@ public class LorannModel implements ILorannModel {
         this.setNbrMobile(Integer.parseInt(B[0][0]));
         
         IMobile[] pt = new IMobile[getNbrMobile()];
+        int[][] C = new int[getNbrMobile()][2];
         
-        for (int i=1;i<Integer.parseInt(B[0][0]);i++) {
+        for (int i=1;i<getNbrMobile();i++) {
+        	C[i][0]=Integer.parseInt(B[i][1]);
+        	C[i][1]=Integer.parseInt(B[i][2]);
+        	
         	switch(B[i][0]) {
         	case"L" :
         			this.setLorann(new Lorann(Integer.parseInt(B[i][1]), Integer.parseInt(B[i][2]), this.getMap()));
@@ -88,13 +112,19 @@ public class LorannModel implements ILorannModel {
         			this.setMonster4(new Monster4(Integer.parseInt(B[i][1]), Integer.parseInt(B[i][2]), this.getMap()));
         			pt[i]=this.getMonster4();
         			break;
+        	case"G": 
+    			this.setGate(new Gate(Integer.parseInt(B[i][1]), Integer.parseInt(B[i][2]), this.getMap()));
+    			pt[i]=this.getGate();
+    			break;
+        		}
+        	}
         
-        
-        }}
         this.setPt(pt);
+        this.setC(C);
      }
 
-    public IMobile[] getPt() {
+
+	public IMobile[] getPt() {
 		return pt;
 	}
 	public void setPt(IMobile[] pt) {

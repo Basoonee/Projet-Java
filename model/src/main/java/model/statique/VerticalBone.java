@@ -15,4 +15,8 @@ import model.Sprite;
 		    VerticalBone() {
 		        super(SPRITE, Permeability.BLOCKING);
 		    }
+
+		    public void setPermeability(final Permeability permeability) {
+		        this.permeability = permeability;
+		    }
 		}

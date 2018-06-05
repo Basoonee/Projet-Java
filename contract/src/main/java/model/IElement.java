@@ -25,6 +25,9 @@ public interface IElement extends ISquare {
      * @return the permeability
      */
     Permeability getPermeability();
+    void setPermeability(Permeability open);
+   public void donothing();
+
 
 
 }
